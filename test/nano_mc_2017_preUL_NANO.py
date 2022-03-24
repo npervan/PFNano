@@ -2,7 +2,7 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: nano_mc_2017_preUL --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --step NANO --conditions 102X_mc2017_realistic_v8 --era Run2_2017,run2_nanoAOD_94XMiniAODv2 --customise_commands=process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False))) --nThreads 4 -n 1000 --filein /store/mc/RunIIFall17MiniAODv2/TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8/MINIAODSIM/PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/270000/B4131826-50C9-E811-852D-001E675811CC.root --fileout file:nano_mc2017.root --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC
+# with command line options: nano_mc_2017_preUL --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --step NANO --conditions 102X_mc2017_realistic_v8 --era Run2_2017,run2_nanoAOD_94XMiniAODv2 --customise_commands=process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False))) --nThreads 4 -n -71997 --filein /store/mc/RunIIFall17MiniAODv2/TT_TuneCH3_13TeV-powheg-herwig7/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/10000/0C331CA2-97D4-E911-9FE0-0CC47AFF01A0.root --fileout file:phFull_nanoPNet_mc2017.root --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run2_2017_cff import Run2_2017
@@ -23,12 +23,12 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(1000)
+    input = cms.untracked.int32(-71997)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('/store/mc/RunIIFall17MiniAODv2/TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8/MINIAODSIM/PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/270000/B4131826-50C9-E811-852D-001E675811CC.root'),
+    fileNames = cms.untracked.vstring('/store/mc/RunIIFall17MiniAODv2/TT_TuneCH3_13TeV-powheg-herwig7/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/10000/0C331CA2-97D4-E911-9FE0-0CC47AFF01A0.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -38,7 +38,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('nano_mc_2017_preUL nevts:1000'),
+    annotation = cms.untracked.string('nano_mc_2017_preUL nevts:-71997'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -52,7 +52,7 @@ process.NANOAODSIMoutput = cms.OutputModule("NanoAODOutputModule",
         dataTier = cms.untracked.string('NANOAODSIM'),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('file:nano_mc2017.root'),
+    fileName = cms.untracked.string('file:phFull_nanoPNet_mc2017.root'),
     outputCommands = process.NANOAODSIMEventContent.outputCommands
 )
 
